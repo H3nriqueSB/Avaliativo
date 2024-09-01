@@ -23,6 +23,20 @@ def mudar_imagem_fundo(nova_imagem):
     label_img.configure(image=img_tk)
     label_img.image = img_tk  
 
+def menu_carrinho():
+    menucadastro.place_forget()
+
+    menucarrinho = ctk.CTkFrame(app, width=1000, height=700, corner_radius=10, fg_color='gray')
+    menucarrinho.place(x=460, y=150)    
+
+    label_menucarrinho = ctk.CTkLabel(menucarrinho, text='LISTA DE PEDIDOS', width=200)
+    label_menucarrinho.place(x=400, y=20)
+
+    listacarrinho = []
+
+    voltar = ctk.CTkButton(menucarrinho, text='Voltar', width=200, command=lambda: [menucarrinho.place_forget()])
+    voltar.place(x=400, y=650)
+
 def abrir_novo_menu():
     menucadastro.place_forget()
 
@@ -55,6 +69,14 @@ def abrir_novo_menu():
     imagem_principal = Image.open('principal.png')
     imagem_principal = imagem_principal.resize((200, 200))
     imagem_tk6 = ImageTk.PhotoImage(imagem_principal)
+
+    imagem_carrinho = Image.open('carrin.png')
+    imagem_carrinho = imagem_carrinho.resize((50, 50))
+    carrinho_tk = ImageTk.PhotoImage(imagem_carrinho)
+
+    carrinho = ctk.CTkButton(menucardapio, image=carrinho_tk, text='', width=50, height=50, command=menu_carrinho)
+    carrinho.place(x=20, y=20)
+    carrinho.image = carrinho_tk
 
     entrada = ctk.CTkButton(menucardapio, image=imagem_tk, text='', width=200, height=200, command=abrir_novo_menu2)
     entrada.place(x=100, y=100)
