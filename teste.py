@@ -48,6 +48,14 @@ def abrir_novo_menu():
     imagem_alchool = imagem_alchool.resize((200, 200))
     imagem_tk4 = ImageTk.PhotoImage(imagem_alchool)
 
+    imagem_bebida = Image.open('bebida.png')
+    imagem_bebida = imagem_bebida.resize((200, 200))
+    imagem_tk5 = ImageTk.PhotoImage(imagem_bebida)
+
+    imagem_principal = Image.open('principal.png')
+    imagem_principal = imagem_principal.resize((200, 200))
+    imagem_tk6 = ImageTk.PhotoImage(imagem_principal)
+
     entrada = ctk.CTkButton(menucardapio, image=imagem_tk, text='', width=200, height=200, command=abrir_novo_menu2)
     entrada.place(x=100, y=100)
     entrada.image = imagem_tk
@@ -63,6 +71,14 @@ def abrir_novo_menu():
     menualchool = ctk.CTkButton(menucardapio, image=imagem_tk4, text='', width=200, height=200, command=abrir_novo_menu5)
     menualchool.place(x=400, y=380)
     menualchool.image = imagem_tk4
+
+    menubebida = ctk.CTkButton(menucardapio, image=imagem_tk5, text='', width=200, height=200, command=abrir_novo_menu6)
+    menubebida.place(x=100, y=380)
+    menubebida.image = imagem_tk5
+
+    menuprincipal = ctk.CTkButton(menucardapio, image=imagem_tk6, text='', width=200, height=200, command=abrir_novo_menu7)
+    menuprincipal.place(x=700, y=380)
+    menuprincipal.image = imagem_tk6
 
     voltar = ctk.CTkButton(menucardapio, text='Voltar', width=200, command=lambda: [menucardapio.place_forget(), restaurar_menu_cadastro()])
     voltar.place(x=400, y=650)
@@ -311,6 +327,126 @@ def abrir_novo_menu5():
     entrada.image = imagem_tk
 
     voltar = ctk.CTkButton(menualchool, text='Voltar', width=200, command=lambda: [menualchool.place_forget()])
+    voltar.place(x=400, y=650)
+
+def abrir_novo_menu6():
+    menucadastro.place_forget()
+
+    menubebida = ctk.CTkFrame(app, width=1000, height=700, corner_radius=10, fg_color='gray')
+    menubebida.place(x=460, y=150)
+
+    label_menucardapio = ctk.CTkLabel(menubebida, text='OPÇÕES DE BEBIDAS', width=200)
+    label_menucardapio.place(x=400, y=20)
+
+    imagem_entrada = Image.open('bebidas/bebida1.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menubebida, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=100, y=100)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('bebidas/bebida2.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menubebida, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=400, y=100)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('bebidas/bebida3.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menubebida, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=700, y=100)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('bebidas/bebida4.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menubebida, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=100, y=380)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('bebidas/bebida5.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menubebida, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=400, y=380)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('bebidas/bebida6.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menubebida, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=700, y=380)
+    entrada.image = imagem_tk
+
+    voltar = ctk.CTkButton(menubebida, text='Voltar', width=200, command=lambda: [menubebida.place_forget()])
+    voltar.place(x=400, y=650)
+
+def abrir_novo_menu7():
+    menucadastro.place_forget()
+
+    menuprincipal = ctk.CTkFrame(app, width=1000, height=700, corner_radius=10, fg_color='gray')
+    menuprincipal.place(x=460, y=150)
+
+    label_menucardapio = ctk.CTkLabel(menuprincipal, text='OPÇÕES DE LANCHES', width=200)
+    label_menucardapio.place(x=400, y=20)
+
+    imagem_entrada = Image.open('principal/comid.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menuprincipal, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=100, y=100)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('principal/comid1.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menuprincipal, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=400, y=100)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('principal/comid3.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menuprincipal, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=700, y=100)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('principal/comid6.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menuprincipal, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=700, y=380)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('principal/comid5.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menuprincipal, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=400, y=380)
+    entrada.image = imagem_tk
+
+    imagem_entrada = Image.open('principal/comid4.png')
+    imagem_entrada = imagem_entrada.resize((200, 200))
+    imagem_tk = ImageTk.PhotoImage(imagem_entrada)
+
+    entrada = ctk.CTkButton(menuprincipal, image=imagem_tk, text='', width=200, height=200)
+    entrada.place(x=100, y=380)
+    entrada.image = imagem_tk
+
+    voltar = ctk.CTkButton(menuprincipal, text='Voltar', width=200, command=lambda: [menuprincipal.place_forget()])
     voltar.place(x=400, y=650)
 
 app = ctk.CTk()
