@@ -1,6 +1,30 @@
 import customtkinter as ctk
 from PIL import Image, ImageTk
 
+carrinholista = {}
+
+imagenlista = {
+    "imagem1": ctk.CTkImage(Image.open("entrada/amarelo.png"), size=(100, 100)),
+    "imagem2": ctk.CTkImage(Image.open("entrada/azul.png"), size=(100, 100)),
+    "imagem3": ctk.CTkImage(Image.open("entrada/branco.png"), size=(100, 100)),
+    "imagem4": ctk.CTkImage(Image.open("entrada/rosa.png"), size=(100, 100)),
+    "imagem5": ctk.CTkImage(Image.open("entrada/roxo.png"), size=(100, 100)),
+    "imagem6": ctk.CTkImage(Image.open("entrada/verde.png"), size=(100, 100))
+}
+
+valorlista = {
+    'amarelo': 25.00,
+    'azul': 15.00,
+    'branco': 50.00,
+    'rosa': 10.00,
+    'roxo': 50.00,
+    'verde':25.00
+}
+
+def adicionar_imagem_ao_dicionario(chave):
+    carrinholista[chave] = imagenlista[chave]
+    print(f"Imagem '{chave}' adicionada ao dicionário:", carrinholista)
+
 def visualizar2():
     if senha2.cget("show") == "*":
         senha2.configure(show="")
@@ -24,17 +48,30 @@ def mudar_imagem_fundo(nova_imagem):
     label_img.image = img_tk  
 
 def menu_carrinho():
-    menucadastro.place_forget()
+    menucadastro.place_forget() 
 
     menucarrinho = ctk.CTkFrame(app, width=1000, height=700, corner_radius=10, fg_color='gray')
-    menucarrinho.place(x=460, y=150)    
+    menucarrinho.place(x=10, y=50)    
 
-    label_menucarrinho = ctk.CTkLabel(menucarrinho, text='LISTA DE PEDIDOS', width=200)
+    label_menucarrinho = ctk.CTkLabel(menucarrinho, text='LISTA DE PEDIDOS', width=200, font=("Arial", 20))
     label_menucarrinho.place(x=400, y=20)
 
-    listacarrinho = []
+    frame_lista_imagens = ctk.CTkFrame(menucarrinho, width=900, height=600, fg_color='gray')
+    frame_lista_imagens.place(x=50, y=80)
 
-    voltar = ctk.CTkButton(menucarrinho, text='Voltar', width=200, command=lambda: [menucarrinho.place_forget()])
+    def mostrar_imagens():
+        limite_colunas = 7  
+        for idx, (chave, imagem) in enumerate(carrinholista.items()):
+            imagem_label = ctk.CTkLabel(frame_lista_imagens, image=imagem, text='')
+            
+            row = idx // limite_colunas
+            column = idx % limite_colunas
+            
+            imagem_label.grid(row=row, column=column, padx=10, pady=5)
+
+    mostrar_imagens()
+
+    voltar = ctk.CTkButton(menucarrinho, text='Voltar', width=200, command=lambda: menucarrinho.place_forget())
     voltar.place(x=400, y=650)
 
 def abrir_novo_menu():
@@ -124,7 +161,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: adicionar_imagem_ao_dicionario("imagem4"))
     entrada.place(x=400, y=100)
     entrada.image = imagem_tk
 
@@ -132,7 +169,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: adicionar_imagem_ao_dicionario("imagem2"))
     entrada.place(x=100, y=100)
     entrada.image = imagem_tk
 
@@ -140,7 +177,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: adicionar_imagem_ao_dicionario("imagem6"))
     entrada.place(x=700, y=100)
     entrada.image = imagem_tk
 
@@ -148,7 +185,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: adicionar_imagem_ao_dicionario("imagem3"))
     entrada.place(x=100, y=380)
     entrada.image = imagem_tk
 
@@ -156,7 +193,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: adicionar_imagem_ao_dicionario("imagem1"))
     entrada.place(x=400, y=380)
     entrada.image = imagem_tk
 
@@ -164,7 +201,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: adicionar_imagem_ao_dicionario("imagem5"))
     entrada.place(x=700, y=380)
     entrada.image = imagem_tk
 
