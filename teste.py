@@ -1,6 +1,17 @@
 import customtkinter as ctk
 from PIL import Image, ImageTk
 
+# produtos = {
+#     'bunda':12.5        
+#             }
+
+# carrinho = {}
+
+# if botao.get('text') in produtos:
+#     carrinho[botao.get('text')] += quantidade 
+
+# botao=ctk.CTkButton(texy='bunda')
+
 def visualizar2():
     if senha2.cget("show") == "*":
         senha2.configure(show="")
@@ -31,8 +42,6 @@ def menu_carrinho():
 
     label_menucarrinho = ctk.CTkLabel(menucarrinho, text='LISTA DE PEDIDOS', width=200)
     label_menucarrinho.place(x=400, y=20)
-
-    listacarrinho = []
 
     voltar = ctk.CTkButton(menucarrinho, text='Voltar', width=200, command=lambda: [menucarrinho.place_forget()])
     voltar.place(x=400, y=650)
