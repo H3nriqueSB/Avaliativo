@@ -1,16 +1,38 @@
 import customtkinter as ctk
 from PIL import Image, ImageTk
 
-# produtos = {
-#     'bunda':12.5        
-#             }
+global chave
 
-# carrinho = {}
+carrinholista = {}
+carrinhovalor = {}
+quantidade = {}
 
-# if botao.get('text') in produtos:
-#     carrinho[botao.get('text')] += quantidade 
+imagenlista = {
+    #Rosquinhas
+    "imagem1": ctk.CTkImage(Image.open("entrada/amarelo.png"), size=(100, 100)),
+    "imagem2": ctk.CTkImage(Image.open("entrada/azul.png"), size=(100, 100)),
+    "imagem3": ctk.CTkImage(Image.open("entrada/branco.png"), size=(100, 100)),
+    "imagem4": ctk.CTkImage(Image.open("entrada/rosa.png"), size=(100, 100)),
+    "imagem5": ctk.CTkImage(Image.open("entrada/roxo.png"), size=(100, 100)),
+    "imagem6": ctk.CTkImage(Image.open("entrada/verde.png"), size=(100, 100))
+    #
+}
 
-# botao=ctk.CTkButton(texy='bunda')
+valorlista = {
+    'imagem1': 25.00,
+    'imagem2': 15.00,
+    'imagem3': 50.00,
+    'imagem4': 10.00,
+    'imagem5': 50.00,
+    'imagem6':25.00
+}
+
+def adicionar_imagem_ao_dicionario(chave):
+    if chave in carrinholista:
+        quantidade[chave] += 1
+    else:
+        carrinholista[chave] = imagenlista[chave]
+        quantidade[chave] = 1
 
 def visualizar2():
     if senha2.cget("show") == "*":
@@ -35,15 +57,37 @@ def mudar_imagem_fundo(nova_imagem):
     label_img.image = img_tk  
 
 def menu_carrinho():
-    menucadastro.place_forget()
+    menucadastro.place_forget() 
 
     menucarrinho = ctk.CTkFrame(app, width=1000, height=700, corner_radius=10, fg_color='gray')
-    menucarrinho.place(x=460, y=150)    
+    menucarrinho.place(x=10, y=50)    
 
-    label_menucarrinho = ctk.CTkLabel(menucarrinho, text='LISTA DE PEDIDOS', width=200)
+    label_menucarrinho = ctk.CTkLabel(menucarrinho, text='LISTA DE PEDIDOS', width=200, font=("Arial", 20))
     label_menucarrinho.place(x=400, y=20)
 
-    voltar = ctk.CTkButton(menucarrinho, text='Voltar', width=200, command=lambda: [menucarrinho.place_forget()])
+    frame_lista_imagens = ctk.CTkFrame(menucarrinho, width=900, height=600, fg_color='gray')
+    frame_lista_imagens.place(x=50, y=80)
+
+    def mostrar_imagens():
+        limite_colunas = 7  
+        for idx, (chave, imagem) in enumerate(carrinholista.items()):
+            valor_total = valorlista[chave] * quantidade[chave]
+            x = valor_total
+            imagem_label = ctk.CTkLabel(frame_lista_imagens, image=imagem, text='')
+            nome_label = ctk.CTkLabel(frame_lista_imagens, text=f'R${x:.2f}')
+            #total_label = ctk.CTkLabel(frame_lista_imagens, text=f'Total: R${total:.2f}')
+            #total=(sum(carrinhovalor.values()))
+
+            row = idx // limite_colunas
+            column = idx % limite_colunas
+            
+            imagem_label.grid(row=row, column=column, padx=10, pady=5)
+            nome_label.grid(row=(row)+1, column=column, padx=0, pady=0)
+            #total_label.grid(row=(row)+5, column=column, padx=0, pady=0)
+
+    mostrar_imagens()
+
+    voltar = ctk.CTkButton(menucarrinho, text='Voltar', width=200, command=lambda: menucarrinho.place_forget())
     voltar.place(x=400, y=650)
 
 def abrir_novo_menu():
@@ -133,7 +177,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda:adicionar_imagem_ao_dicionario("imagem4"))
     entrada.place(x=400, y=100)
     entrada.image = imagem_tk
 
@@ -141,7 +185,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: adicionar_imagem_ao_dicionario("imagem2"))
     entrada.place(x=100, y=100)
     entrada.image = imagem_tk
 
@@ -149,7 +193,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: adicionar_imagem_ao_dicionario("imagem6"))
     entrada.place(x=700, y=100)
     entrada.image = imagem_tk
 
@@ -157,7 +201,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: adicionar_imagem_ao_dicionario("imagem3"))
     entrada.place(x=100, y=380)
     entrada.image = imagem_tk
 
@@ -165,7 +209,7 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: [adicionar_imagem_ao_dicionario("imagem1")])
     entrada.place(x=400, y=380)
     entrada.image = imagem_tk
 
@@ -173,9 +217,17 @@ def abrir_novo_menu2():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menuentrada, image=imagem_tk, text='', width=200, height=200, command=lambda: [adicionar_imagem_ao_dicionario("imagem5")])
     entrada.place(x=700, y=380)
     entrada.image = imagem_tk
+
+    imagem_carrinho = Image.open('carrin.png')
+    imagem_carrinho = imagem_carrinho.resize((50, 50))
+    carrinho_tk = ImageTk.PhotoImage(imagem_carrinho)
+
+    carrinho = ctk.CTkButton(menuentrada, image=carrinho_tk, text='', width=50, height=50, command=menu_carrinho)
+    carrinho.place(x=20, y=20)
+    carrinho.image = carrinho_tk
 
     voltar = ctk.CTkButton(menuentrada, text='Voltar', width=200, command=lambda: [menuentrada.place_forget()])
     voltar.place(x=400, y=650)
@@ -237,23 +289,31 @@ def abrir_novo_menu3():
     entrada.place(x=700, y=380)
     entrada.image = imagem_tk
 
+    imagem_carrinho = Image.open('carrin.png')
+    imagem_carrinho = imagem_carrinho.resize((50, 50))
+    carrinho_tk = ImageTk.PhotoImage(imagem_carrinho)
+
+    carrinho = ctk.CTkButton(menudochef, image=carrinho_tk, text='', width=50, height=50, command=menu_carrinho)
+    carrinho.place(x=20, y=20)
+    carrinho.image = carrinho_tk
+
     voltar = ctk.CTkButton(menudochef, text='Voltar', width=200, command=lambda: [menudochef.place_forget()])
     voltar.place(x=400, y=650)
 
 def abrir_novo_menu4():
     menucadastro.place_forget()
 
-    menudochef = ctk.CTkFrame(app, width=1000, height=700, corner_radius=10, fg_color='gray')
-    menudochef.place(x=460, y=150)
+    menusobremesa = ctk.CTkFrame(app, width=1000, height=700, corner_radius=10, fg_color='gray')
+    menusobremesa.place(x=460, y=150)
 
-    label_menucardapio = ctk.CTkLabel(menudochef, text='OPÇÕES DE SOBREMESA', width=200)
+    label_menucardapio = ctk.CTkLabel(menusobremesa, text='OPÇÕES DE SOBREMESA', width=200)
     label_menucardapio.place(x=400, y=20)
 
     imagem_entrada = Image.open('sobremesa/balinha.jfif')
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menudochef, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menusobremesa, image=imagem_tk, text='', width=200, height=200)
     entrada.place(x=100, y=100)
     entrada.image = imagem_tk
 
@@ -261,7 +321,7 @@ def abrir_novo_menu4():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menudochef, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menusobremesa, image=imagem_tk, text='', width=200, height=200)
     entrada.place(x=400, y=100)
     entrada.image = imagem_tk
 
@@ -269,7 +329,7 @@ def abrir_novo_menu4():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menudochef, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menusobremesa, image=imagem_tk, text='', width=200, height=200)
     entrada.place(x=700, y=100)
     entrada.image = imagem_tk
 
@@ -277,7 +337,7 @@ def abrir_novo_menu4():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menudochef, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menusobremesa, image=imagem_tk, text='', width=200, height=200)
     entrada.place(x=700, y=380)
     entrada.image = imagem_tk
 
@@ -285,7 +345,7 @@ def abrir_novo_menu4():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menudochef, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menusobremesa, image=imagem_tk, text='', width=200, height=200)
     entrada.place(x=400, y=380)
     entrada.image = imagem_tk
 
@@ -293,11 +353,19 @@ def abrir_novo_menu4():
     imagem_entrada = imagem_entrada.resize((200, 200))
     imagem_tk = ImageTk.PhotoImage(imagem_entrada)
 
-    entrada = ctk.CTkButton(menudochef, image=imagem_tk, text='', width=200, height=200)
+    entrada = ctk.CTkButton(menusobremesa, image=imagem_tk, text='', width=200, height=200)
     entrada.place(x=100, y=380)
     entrada.image = imagem_tk
 
-    voltar = ctk.CTkButton(menudochef, text='Voltar', width=200, command=lambda: [menudochef.place_forget()])
+    imagem_carrinho = Image.open('carrin.png')
+    imagem_carrinho = imagem_carrinho.resize((50, 50))
+    carrinho_tk = ImageTk.PhotoImage(imagem_carrinho)
+
+    carrinho = ctk.CTkButton(menusobremesa, image=carrinho_tk, text='', width=50, height=50, command=menu_carrinho)
+    carrinho.place(x=20, y=20)
+    carrinho.image = carrinho_tk
+
+    voltar = ctk.CTkButton(menusobremesa, text='Voltar', width=200, command=lambda: [menusobremesa.place_forget()])
     voltar.place(x=400, y=650)
 
 def abrir_novo_menu5():
@@ -356,6 +424,14 @@ def abrir_novo_menu5():
     entrada = ctk.CTkButton(menualchool, image=imagem_tk, text='', width=200, height=200)
     entrada.place(x=100, y=380)
     entrada.image = imagem_tk
+
+    imagem_carrinho = Image.open('carrin.png')
+    imagem_carrinho = imagem_carrinho.resize((50, 50))
+    carrinho_tk = ImageTk.PhotoImage(imagem_carrinho)
+
+    carrinho = ctk.CTkButton(menualchool, image=carrinho_tk, text='', width=50, height=50, command=menu_carrinho)
+    carrinho.place(x=20, y=20)
+    carrinho.image = carrinho_tk
 
     voltar = ctk.CTkButton(menualchool, text='Voltar', width=200, command=lambda: [menualchool.place_forget()])
     voltar.place(x=400, y=650)
@@ -417,6 +493,14 @@ def abrir_novo_menu6():
     entrada.place(x=700, y=380)
     entrada.image = imagem_tk
 
+    imagem_carrinho = Image.open('carrin.png')
+    imagem_carrinho = imagem_carrinho.resize((50, 50))
+    carrinho_tk = ImageTk.PhotoImage(imagem_carrinho)
+
+    carrinho = ctk.CTkButton(menubebida, image=carrinho_tk, text='', width=50, height=50, command=menu_carrinho)
+    carrinho.place(x=20, y=20)
+    carrinho.image = carrinho_tk
+
     voltar = ctk.CTkButton(menubebida, text='Voltar', width=200, command=lambda: [menubebida.place_forget()])
     voltar.place(x=400, y=650)
 
@@ -476,6 +560,14 @@ def abrir_novo_menu7():
     entrada = ctk.CTkButton(menuprincipal, image=imagem_tk, text='', width=200, height=200)
     entrada.place(x=100, y=380)
     entrada.image = imagem_tk
+
+    imagem_carrinho = Image.open('carrin.png')
+    imagem_carrinho = imagem_carrinho.resize((50, 50))
+    carrinho_tk = ImageTk.PhotoImage(imagem_carrinho)
+
+    carrinho = ctk.CTkButton(menuprincipal, image=carrinho_tk, text='', width=50, height=50, command=menu_carrinho)
+    carrinho.place(x=20, y=20)
+    carrinho.image = carrinho_tk
 
     voltar = ctk.CTkButton(menuprincipal, text='Voltar', width=200, command=lambda: [menuprincipal.place_forget()])
     voltar.place(x=400, y=650)
